@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-export class LinkedList {
+export class SinglyLinkedList {
   constructor(value) {
     const node = new Node(value);
     this.head = node;
@@ -132,17 +132,20 @@ export class LinkedList {
   }
 
   reverse() {
+    if (this.head === this.tail) {
+      return this;
+    }
     let temp = this.head;
     this.head = this.tail;
     this.tail = temp;
 
-    let nxt = temp.next;
+    let next = temp.next;
     let prev = null;
     for (let i = 0; i < this.length; i++) {
-      nxt = temp.next;
+      next = temp.next;
       temp.next = prev;
       prev = temp;
-      temp = nxt;
+      temp = next;
     }
     return this;
   }
