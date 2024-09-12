@@ -60,4 +60,75 @@ export class BST {
       return false;
     }
   }
+
+  BFS() {
+    let current = this.root;
+    let queue = [];
+    let result = [];
+
+    queue.push(current);
+    while (queue.length) {
+      current = queue.shift();
+      result.push(current.value);
+      if (current.left) {
+        queue.push(current.left);
+      }
+      if (current.right) {
+        queue.push(current.right);
+      }
+    }
+
+    return result;
+  }
+
+  preOrderDFS() {
+    let result = [];
+
+    const traverse = (current) => {
+      result.push(current.value);
+      if (current.left) {
+        traverse(current.left);
+      }
+      if (current.right) {
+        traverse(current.right);
+      }
+    };
+
+    traverse(this.root);
+    return result;
+  }
+
+  postOrderDFS() {
+    let result = [];
+
+    const traverse = (current) => {
+      if (current.left) {
+        traverse(current.left);
+      }
+      if (current.right) {
+        traverse(current.right);
+      }
+      result.push(current.value);
+    };
+
+    traverse(this.root);
+    return result;
+  }
+
+  inOrderDFS() {
+    let result = [];
+
+    const traverse = (current) => {
+      if (current.left) {
+        traverse(current.left);
+      }
+      result.push(current.value);
+      if (current.right) {
+        traverse(current.right);
+      }
+    };
+
+    traverse(this.root);
+    return result;
+  }
 }
