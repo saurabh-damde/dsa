@@ -227,4 +227,75 @@ export class LinkedList {
       temp = temp.next;
     }
   }
+
+  bubbleSort() {
+    if (this.length < 2) return;
+
+    let sortedUntil = null;
+    while (sortedUntil !== this.head.next) {
+      let current = this.head;
+      while (current.next !== sortedUntil) {
+        let nextNode = current.next;
+        if (current.value > nextNode.value) {
+          const temp = current.value;
+          current.value = nextNode.value;
+          nextNode.value = temp;
+        }
+        current = current.next;
+      }
+      sortedUntil = current;
+    }
+  }
+
+  selectionSort() {
+    if (this.length < 2) {
+      return;
+    }
+    let current = this.head;
+    while (current.next) {
+      let smallest = current;
+      let innerCurrent = current.next;
+      while (innerCurrent) {
+        if (innerCurrent.value < smallest.value) {
+          smallest = innerCurrent;
+        }
+        innerCurrent = innerCurrent.next;
+      }
+      if (smallest !== current) {
+        let temp = current.value;
+        current.value = smallest.value;
+        smallest.value = temp;
+      }
+      current = current.next;
+    }
+    this.tail.value = current.value;
+  }
+
+  insertionSort() {
+    if (this.length < 2) {
+      return;
+    }
+    let sortedHead = null;
+    let current = this.head;
+    while (current) {
+      let nextNode = current.next;
+      if (!sortedHead || current.value < sortedHead.value) {
+        current.next = sortedHead;
+        sortedHead = current;
+      } else {
+        let sortedCurrent = sortedHead;
+        while (sortedCurrent.next && sortedCurrent.next.value < current.value) {
+          sortedCurrent = sortedCurrent.next;
+        }
+        current.next = sortedCurrent.next;
+        sortedCurrent.next = current;
+      }
+      current = nextNode;
+    }
+    this.head = sortedHead;
+    this.tail = this.head;
+    while (this.tail && this.tail.next) {
+      this.tail = this.tail.next;
+    }
+  }
 }
