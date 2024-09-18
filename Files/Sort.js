@@ -76,3 +76,30 @@ export const mergeSort = (array) => {
 
   return merge(array1, array2);
 };
+
+const swap = (array, first, second) => {
+  let temp = array[first];
+  array[first] = array[second];
+  array[second] = temp;
+};
+
+const pivot = (array, pivotIndex = 0, endIndex = array.length - 1) => {
+  let swapIndex = pivotIndex;
+  for (let i = pivotIndex + 1; i <= endIndex; i++) {
+    if (array[i] < array[pivotIndex]) {
+      swapIndex++;
+      swap(array, swapIndex, i);
+    }
+  }
+  swap(array, pivotIndex, swapIndex);
+  return swapIndex;
+};
+
+export const quickSort = (array, left = 0, right = array.length - 1) => {
+  if (left < right) {
+    let pivotIndex = pivot(array, left, right);
+    quickSort(array, left, pivotIndex - 1);
+    quickSort(array, pivotIndex + 1, right);
+  }
+  return array;
+};
